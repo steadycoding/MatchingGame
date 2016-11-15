@@ -48,3 +48,17 @@ textarea {
     display: none
   }
 }
+
+/*Image To display for the lobby page.*/
+.lobby-screen-background {
+    /*background-image: url('../images/puzzle-1686937_640.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;*/
+    background-color:  #B33F62;
+    min-height: 500px;
+}
+
+/*.default-brand > h1, h2, h3, h4, h5, h6, label, a {
+    color: #F9564F;
+}*/

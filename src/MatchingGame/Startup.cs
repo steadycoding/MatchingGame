@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using MatchingGame.Data;
 using MatchingGame.Models;
 using MatchingGame.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MatchingGame
 {
@@ -47,7 +48,10 @@ namespace MatchingGame
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -76,6 +80,15 @@ namespace MatchingGame
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+            /*
+              Once you publish your Web site to Azure Web App, you should reset the AppSecret in the Facebook developer portal.
+              Set the Facebook AppId and AppSecret as application setting in the Azure Web App portal. The configuration system is setup to read keys from environment variables.
+             */
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = Configuration["Authentication:Facebook:AppId"],
+                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
+            });
 
             app.UseMvc(routes =>
             {

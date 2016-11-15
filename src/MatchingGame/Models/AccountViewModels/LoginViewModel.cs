@@ -18,5 +18,7 @@ namespace MatchingGame.Models.AccountViewModels
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        public bool ExternalLogin { get; set; }
     }
 }
